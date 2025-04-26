@@ -88,7 +88,7 @@ class Food:
         # Task 4.1 - create hitbox and make sure it updates
         self.hitbox = self.sprite.get_rect().move(self.position_x, self.position_y)
     
-    # Task 3.5 - create a draw method inside food
+    # Task 3.4 - create a draw method inside food
     def draw(self):
         screen.blit(self.sprite, (self.position_x, self.position_y))
         
@@ -135,7 +135,7 @@ while running:
     # Task 4.1 - update the player hitbox
     player.update()
     
-    # Task 3.6 - show all the foods in the active food list
+    # Task 3.5 - show all the foods in the active food list
     for foods in active_foods:
         player.interact_foods(foods)
         foods.draw()
