@@ -125,10 +125,10 @@ while running:
             running = False
             break
     
-    # Task 2.5 - fix the duplicating poco LOL
+    # Task 2.6 - fix the duplicating poco LOL
     screen.blit(background, (0, 0))
     
-    # Task 2.4 - getting the player to move
+    # Task 2.5 - getting the player to move
     player.move()
     player.draw()
     
