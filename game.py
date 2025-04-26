@@ -33,22 +33,22 @@ class Player:
     def move(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
-            self.position_y -= 5
+            self.position_y -= 1
             # Task 2.5 - bonus task: make poco turn when moving
             self.image = "images/player/poco_up.png"
             
-        elif keys[pygame.K_a]:
-            self.position_x -= 5
+        if keys[pygame.K_a]:
+            self.position_x -= 1
             # Task 2.5 - bonus task: make poco turn when moving
             self.image = "images/player/poco_left.png"
             
-        elif keys[pygame.K_s]:
-            self.position_y += 5
+        if keys[pygame.K_s]:
+            self.position_y += 1
             # Task 2.5 - bonus task: make poco turn when moving
             self.image = "images/player/poco_down.png"
 
-        elif keys[pygame.K_d]:
-            self.position_x += 5
+        if keys[pygame.K_d]:
+            self.position_x += 1
             # Task 2.5 - bonus task: make poco turn when moving
             self.image = "images/player/poco_right.png"
 
