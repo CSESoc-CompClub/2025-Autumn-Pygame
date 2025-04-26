@@ -131,6 +131,8 @@ while running:
     # Task 2.4 - getting the player to move
     player.move()
     player.draw()
+    
+    # Task 4.1 - update the player hitbox
     player.update()
     
     # Task 3.6 - show all the foods in the active food list
