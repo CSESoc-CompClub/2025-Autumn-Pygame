@@ -42,22 +42,22 @@ class Player:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
             self.position_y -= 1
-            # Task 2.5 - bonus task: make poco turn when moving
+            # Task 2.6 - bonus task: make poco turn when moving
             self.image = "images/player/poco_up.png"
 
         if keys[pygame.K_a]:
             self.position_x -= 1
-            # Task 2.5 - bonus task: make poco turn when moving
+            # Task 2.6 - bonus task: make poco turn when moving
             self.image = "images/player/poco_left.png"
 
         if keys[pygame.K_s]:
             self.position_y += 1
-            # Task 2.5 - bonus task: make poco turn when moving
+            # Task 2.6 - bonus task: make poco turn when moving
             self.image = "images/player/poco_down.png"
 
         if keys[pygame.K_d]:
             self.position_x += 1
-            # Task 2.5 - bonus task: make poco turn when moving
+            # Task 2.6 - bonus task: make poco turn when moving
             self.image = "images/player/poco_right.png"
     
     # Task 4.2 - colliding with the fruit removes it from active fruits
@@ -125,10 +125,10 @@ while running:
             running = False
             break
     
-    # Task 2.6 - fix the duplicating poco LOL
+    # Task 2.5 - fix the duplicating poco LOL
     screen.blit(background, (0, 0))
     
-    # Task 2.5 - getting the player to move
+    # Task 2.4 - getting the player to move
     player.move()
     player.draw()
     
