@@ -26,6 +26,8 @@ class Player:
         self.sprite = pygame.transform.scale(pygame.image.load(self.image), self.size)
         # Task 4.1 - create hitbox and make sure it updates
         self.hitbox = self.sprite.get_rect().move(self.position_x, self.position_y)
+        # Task 5.1 - create a score
+        self.score = 0
     
     # Task 4.1 - create hitbox and make sure it updates
     def update(self):
@@ -63,6 +65,8 @@ class Player:
         collision = self.hitbox.colliderect(food.hitbox)
         if collision:
             active_foods.remove(food)
+            # Task 5.2 - increase the score if foods have been picked up
+            player.score += 1
                 
 
 # Task 2.2 - create a player instance and print out the properties
@@ -108,6 +112,10 @@ for key, value in foods.items():
     print(key, value[0], value[1], value[2])
     active_foods.append(Food(key,value[0], value[1], value[2]))
 
+# Task 5.3 - show the score on the screen
+font = pygame.font.SysFont('Palatino', 50)
+font_colour = (255, 255, 255) # pygame colours use RGB values, this value is white
+score_pos = (10, 10)
 
 # Task 1.2 - create a running loop
 running = True
@@ -129,6 +137,13 @@ while running:
     for foods in active_foods:
         player.interact_foods(foods)
         foods.draw()
+        
+    # Task 5.3 - show the score on the screen
+    score_text = font.render(f'Score: {player.score}', True, font_colour)
+    screen.blit(score_text, score_pos)
+    if (player.score == 6): # game over! you win :)
+        print("You win!")
+        running = False
     
 
     pygame.display.update()
