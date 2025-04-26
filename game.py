@@ -24,7 +24,13 @@ class Player:
         self.size = (100, 100)
         self.image = "images/player/poco_down.png"
         self.sprite = pygame.transform.scale(pygame.image.load(self.image), self.size)
-        
+        # Task 4.1 - create hitbox and make sure it updates
+        self.hitbox = self.sprite.get_rect().move(self.position_x, self.position_y)
+    
+    # Task 4.1 - create hitbox and make sure it updates
+    def update(self):
+        self.hitbox = self.sprite.get_rect().move(self.position_x, self.position_y)
+    
     # Task 2.3 - create draw method
     def draw(self):
         screen.blit(self.sprite, (self.position_x, self.position_y))
@@ -36,12 +42,12 @@ class Player:
             self.position_y -= 1
             # Task 2.5 - bonus task: make poco turn when moving
             self.image = "images/player/poco_up.png"
-            
+
         if keys[pygame.K_a]:
             self.position_x -= 1
             # Task 2.5 - bonus task: make poco turn when moving
             self.image = "images/player/poco_left.png"
-            
+
         if keys[pygame.K_s]:
             self.position_y += 1
             # Task 2.5 - bonus task: make poco turn when moving
@@ -51,6 +57,13 @@ class Player:
             self.position_x += 1
             # Task 2.5 - bonus task: make poco turn when moving
             self.image = "images/player/poco_right.png"
+    
+    # Task 4.2 - colliding with the fruit removes it from active fruits
+    def interact_foods(self, food):
+        collision = self.hitbox.colliderect(food.hitbox)
+        if collision:
+            active_foods.remove(food)
+                
 
 # Task 2.2 - create a player instance and print out the properties
 player = Player()
@@ -68,6 +81,9 @@ class Food:
         self.size = (50, 50)
         self.image = image
         self.sprite = pygame.transform.scale(pygame.image.load(image), self.size)
+        # Task 4.1 - create hitbox and make sure it updates
+        self.hitbox = self.sprite.get_rect().move(self.position_x, self.position_y)
+    
     # Task 3.5 - create a draw method inside food
     def draw(self):
         screen.blit(self.sprite, (self.position_x, self.position_y))
@@ -76,12 +92,12 @@ class Food:
 foods = {
     # "food" : ["sprite path", pos_x, pos_y]
     # key : value
-    "banana": ["images/food/banana.png", 50, 500],
+    "banana": ["images/food/banana.png", 300, 500],
     "grapes": ["images/food/grapes.png", 500, 400],
     "peach": ["images/food/peach.png", 200, 400],
-    "strawberry": ["images/food/strawberry.png", 300, 20],
+    "strawberry": ["images/food/strawberry.png", 300, 100],
     "sushi": ["images/food/sushi.png", 600, 200],
-    "watermelon": ["images/food/watermelon.png", 100, 70]
+    "watermelon": ["images/food/watermelon.png", 100, 400]
 }
 
 # Task 3.3 - initialise active foods
@@ -92,6 +108,7 @@ for key, value in foods.items():
     print(key, value[0], value[1], value[2])
     active_foods.append(Food(key,value[0], value[1], value[2]))
 
+
 # Task 1.2 - create a running loop
 running = True
 while running:
@@ -100,15 +117,18 @@ while running:
             running = False
             break
     
-    # Task 2.5 - fix the poco LOL
+    # Task 2.5 - fix the duplicating poco LOL
     screen.blit(background, (0, 0))
     
     # Task 2.4 - getting the player to move
     player.move()
     player.draw()
+    player.update()
     
     # Task 3.6 - show all the foods in the active food list
     for foods in active_foods:
+        player.interact_foods(foods)
         foods.draw()
+    
 
     pygame.display.update()
